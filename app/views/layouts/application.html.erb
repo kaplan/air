@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%#= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
@@ -37,8 +37,6 @@
 </head>
 <body>
 
-<div class="container">
-
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -55,16 +53,23 @@
           <ul class="nav pull-right">
             <li><a href="/airports.html">Cities</a></li>
             <li><a href="/support.html">Customer Support</a></li>
-            <li><a href="/profile.html">My Profile</a></li>
-            <li><a href="#about">Logout</a></li>
+            <%# if session[:user_id] %>
+            <% if logged_in? %>
+              <li><%= link_to "My Profile", user_url(session[:user_id]) %></li>
+              <li><a href="/logout">Logout</a></li>
+            <% else %>
+              <li><a href="/users/new">Sign Up</a></li>
+              <li><a href="/login">Login</a></li>
+            <% end %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
   </div>
 
-
-<%= yield %>
+  <div class="container">
+  <%= notice %>
+  <%= yield %>
 
   <hr>
 
