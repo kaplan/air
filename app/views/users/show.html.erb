@@ -1,10 +1,21 @@
 <div class="row">
   <div class="span12">
     <h1 class="page-header">My Profile</h1>
-    <h2>Total Miles Earned: <%= "need to compute miles for all flights" %></h2>
+    <h2>Total Miles Earned: <%= "000" %></h2>
     <h2>Reservations</h2>
     <ul>
-      <%= "need a database backed resource to hold reservations" %>
+      <% @reservations = Reservation.where(:user_id => current_user).each do |reservation| %>
+        <li>
+          <a href=#>
+          <%= "Flight ##{reservation.flight.number}." %>
+          <%= reservation.flight.departs_at.localtime.strftime("%D") %> *
+          <%= reservation.flight.departure_airport %>-<%= reservation.flight.arrival_airport %> *
+          <%= reservation.flight.departs_at.localtime.strftime("%l:%M %p") %> -
+          <%= reservation.flight.arrives_at.localtime.strftime("%l:%M %p %Z") %>
+
+        </a>
+        </li>
+      <% end %>
       <!-- <li><a href="#">Flight #176. 4/16/13  ORD-JFK  9:30AM - 11:08AM</a></li> -->
       <!-- <li><a href="#">Flight #461. 6/11/13  LAX-MDW  10:20AM - 2:47PM</a></li> -->
     </ul>

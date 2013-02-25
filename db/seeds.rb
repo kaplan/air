@@ -21,9 +21,14 @@ airports = [
   airport = airports.sample
   randomizer = [0,1].shuffle
   f = Flight.new
-  f.number = rand(000..999)
+  f.number = rand(100..999)
   f.departure_airport = airport[randomizer[0]]
-  f.departs_at = Time.now.beginning_of_day + rand(24.hours)
+
+  # f.departs_at = Time.now + rand(0..24).hours + rand(0..60).minutes
+  # f.departs_at = Time.new.beginning_of_day + rand(24.hours)
+  # f.departs_at = DateTime.now.to_time.beginning_of_day + rand(24.hours)
+  f.departs_at = DateTime.now.to_time + rand(0..24).hours + rand(0..60).minutes
+
   f.arrival_airport = airport[randomizer[1]]
   f.miles = airport[2]
   f.seats = 60

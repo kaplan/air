@@ -20,13 +20,22 @@
         <tr>
           <td><%= flight.number %></td>
           <td><%= flight.departure_airport %></td>
-          <td><%= flight.departs_at.localtime.strftime("%l:%M %p %Z") %></td>
+          <td>
+            <%#= flight.departs_at.localtime.strftime("%D at %l:%M %p %Z") %>
+            <%= flight.departs_at.localtime.strftime("%D at %l:%M %p %Z") %>
+          </td>
           <td><%= flight.arrival_airport %></td>
-          <td><%= flight.arrives_at.localtime.strftime("%l:%M %p %Z") %></td>
+          <td><%= flight.arrives_at.localtime.strftime("%D at %l:%M %p %Z") %></td>
           <td><%= flight.miles %></td>
           <td><%= flight.duration %> minutes</td>
           <td><%= flight.seats %></td>
-          <td><a class="btn btn-success">Book Now</a></td>
+            <td>
+              <%= form_tag new_reservation_url, :method => "get" do %>
+                <%= hidden_field_tag :flight_id, flight.id %>
+                <%= submit_tag "Book Now", class:"btn btn-success" %>
+              <% end %>
+            </td>
+          <!-- <td><a class="btn btn-success">Book Now</a></td> -->
         </tr>
         <% end %>
       </tbody>

@@ -9,4 +9,6 @@ class Flight < ActiveRecord::Base
     departs_at + duration.minutes
   end
 
+  has_many :reservations
+
 end

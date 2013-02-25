@@ -1,4 +1,6 @@
 OneWayAir::Application.routes.draw do
+  resources :reservations
+
 
   get "/login" => 'Sessions#new', as: "login"
 
